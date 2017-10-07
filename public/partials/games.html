@@ -1,0 +1,9 @@
+<h1>Games</h1>
+<div id="games">
+    <ul>
+        <li><a href='#/game/new'>Start new game</a></li>
+        <li ng-repeat="g in games">
+            <a href="#/game/{{g.id}}/play">#<span ng-bind="g.id"></span> | <span ng-bind="g.name"></span> | <span ng-bind="g.created_at"></span> | Turn: <span ng-bind="g.turn"></span> | Tiles left: <span ng-bind="g.tiles"></span></a>
+        </li>        
+    </ul>                
+</div>

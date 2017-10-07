@@ -1,0 +1,70 @@
+<br>
+<!-- Header -->
+<div class="form-inline" >
+    <button ng-click="gotoMap()" class="btn btn-default">Back to Map</button>        
+</div>    
+
+<h3>Your devices</h3>
+<div ng-show="devices.length===0">    
+    You have no devices yet.
+    <br><br>
+</div>
+<button ng-click="refreshDeviceList()" class="btn btn-info">Refresh list</button>
+
+<div ng-show="devices.length>0">
+    <br>
+    <form>
+    <table class="table table-condensed table-hover table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th>Default</th>
+                <th>IMEI</th>
+                <th>Device name</th>
+                <th>Device info</th>
+                <th>Attached to account at</th>
+                <th>Status</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>        
+            <tr ng-repeat="d in devices">
+                <td><span ng-bind="$index+1"></span></td>
+                <td><input type="radio" name="defaultDevice" ng-checked="d.defaultdevice===1" ng-click="setDefaultDevice(d.id)"></td>
+                <td><span ng-bind="d.imei"></span></td>
+                <td><span ng-bind="d.name"></span></td>
+                <td><small><span ng-bind="d.description"></span></small><br><span ng-bind="d.device_created_at"></span></td>
+                <td><span ng-bind="d.created_at"></span></td>
+                <td><span ng-bind="d.status"></span></td>
+                <td><button ng-click="deleteUserDevice(d.id)" class="btn btn-danger">Delete</button></td>
+            </tr>
+        </tbody>
+    </table>
+    </form>
+</div>
+
+<br>
+<h3>Add new device to your account</h3>
+<form class="form-inline">  
+    <div class="form-group">
+        <label for="inputIMEI">EMEI number</label>
+        <input type="text" size="16" maxlength="15" 
+               class="form-control" 
+               id="inputIMEI" 
+               placeholder="Enter IMEI number"
+               ng-model="device.imei">        
+    </div>
+
+    <div class="form-group">
+        <label for="inputName">Device name</label>
+        <input type="text" size="41" maxlength="40" 
+               class="form-control" 
+               id="inputName" 
+               placeholder="Enter name for this device"
+               ng-model="device.name">        
+    </div>
+    
+    <button ng-click="addNewDevice()" class="btn btn-success">Add new device</button>
+</form>
+<br>
+<br>

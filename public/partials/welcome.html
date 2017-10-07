@@ -1,0 +1,28 @@
+<div style="margin-left: auto; 
+            margin-right: auto; 
+            text-align: center">
+    
+    <h2>Play</h2>
+    
+    <p>        
+        Level 
+        <select ng-model="level" ng-options="l.value as l.label for l in levels">            
+        </select>       
+    </p>
+    
+    <p>Theme 
+        <select ng-model="theme" ng-options="l.themename as l.comment for l in themes">            
+        </select>       
+    </p>
+    
+    <br>
+    <a href='' 
+       ng-hide="(loading)" 
+       ng-click="play()" 
+       class="btn-play"><img src='images/play.png' border='0' height=100 width=100 alt="Play game"></a>
+    
+    
+    <!-- temp -->
+    <br>
+    <div style="display: none">{{showCoords()}}</div>
+</div>

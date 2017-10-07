@@ -1,0 +1,58 @@
+
+<!-- Map -->
+<div id="map" style="height: 395px; border: 1px lightgrey solid;"></div>
+
+<!-- time -->
+<div class="form-inline" >
+    <select class="form form-control" 
+            ng-model="hours"
+            ng-change="onHoursChange()"
+            style="width: 100px; height: 32px;">
+        <option value="1">1 hour</option>
+        <option value="2">2 hours</option>
+        <option value="4">4 hours</option>
+        <option value="8">8 hours</option>
+        <option value="24">1 day</option>
+        <!--<option value="1000">ADMIN:localhost</option>-->
+    </select>         
+
+    <!-- Message -->
+    <button ng-click="pauseResume()"><span ng-bind="pauseResumeLabel"></span></button>
+    <span class="glyphicon glyphicon-time" style="height: 32px;"></span>
+    <span ng-bind="timeleft"></span>
+    &nbsp;
+    <span ng-bind="message"></span> 
+</div>
+
+
+<!-- Table -->
+<table ng-hide="lastRefreshDate===null"
+       class="table table-bordered table-condensed table-striped"
+       style="font-size: 9px; width:98%;">
+    <thead>
+        <tr>
+            <th>when</th>
+            <th>device</th>
+            <th>longitude</th>
+            <th>latitude</th>                        
+            <th>altitude</th>
+            <th>accuracy</th>
+            <th>speed</th>
+            <th>bearing</th>
+            <th>id</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="geo in geolocs | orderBy: '-id' | limitTo: 10">
+            <td><span ng-bind="geo.devicetime"></span></td>
+            <td><span ng-bind="geo.name"></span></td>
+            <td><span ng-bind="geo.longitude"></span></td>
+            <td><span ng-bind="geo.latitude"></span></td>                        
+            <td><span ng-bind="geo.altitude"></span></td>                        
+            <td><span ng-bind="geo.accuracy"></span></td>  
+            <td><span ng-bind="geo.speed"></span></td>
+            <td><span ng-bind="geo.bearing"></span></td>                        
+            <td><span ng-bind="geo.id"></span></td>
+        </tr>
+    </tbody>
+</table>

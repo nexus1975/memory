@@ -1,0 +1,136 @@
+<audio id="good" preload="auto" src="sounds/good.mp3"></audio>
+<audio id="bad" preload="auto" src="sounds/bad.mp3"></audio>
+
+<div id="panel" 
+     ng-show="players.length>0" 
+     style="width:{{((tileSize*8)+16)}}px">   
+    
+    <!--
+    <div id="message" ng-show="false">
+        <span ng-bind="message"></span>
+    </div>
+    -->
+    
+    <div id="tablescore" style="width: {{((tileSize*8)+16)}}px;"> 
+        <table style="width: 100%">
+            <tr>
+                <!-- 1st user -->
+                <td style="width: 40%; 
+                           text-align: right; 
+                           vertical-align: center;" 
+                    ng-class="(players[1].num===game.turn)?'activeuser':'inactiveuser'">
+                    
+                    <div class="user1">  
+                        <span style="opacity: {{(players[1].num===game.turn)?1:0;}};">
+                            <font size="+1">&#9658;</font>
+                        </span>
+                        <span ng-bind="players[1].name" style="opacity:1;"></span>                    
+                    </div> 
+                    
+                </td>
+                
+                <!-- score -->
+                <td  id="score" style="width: 20%; 
+                                       vertical-align: bottom; 
+                                       padding: 0px; 
+                                       margin: 0px;">
+                    <div>
+                        <b><span ng-bind="players[1].score"></span>:<span ng-bind="players[0].score"></span></b>
+                    </div>
+                </td>
+                
+                <!-- 2nd user -->
+                <td style="width: 40%; 
+                           text-align: left;
+                           vertical-align: center;" 
+                    ng-class="(players[0].num===game.turn)?'activeuser':'inactiveuser'" >   
+                    
+                    <div class="user0" align="right">
+                       <span style="opacity: {{(players[0].num===game.turn)?1:0;}}">
+                           <font size="+1">&#9658;</font>
+                       </span>
+                       <span ng-bind="players[0].name" style="opacity:1;"></span>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>    
+
+    <!-- board -->
+    <div id="board">                         
+        <div class="boardgrid" 
+             ng-show="game.theme"
+             style="width: {{((tileSize*8)+16)}}px; 
+                    height: {{((tileSize*8)+16)}}px; 
+                    background-image: url(images/themes/{{game.theme}}/x-size/{{game.background}}); 
+                    background-size: cover; 
+                    background-repeat: no-repeat; 
+                    background-position: center center;">
+            
+            <div class="boardrow" ng-repeat="row in board.slice(0,board.length) track by $index">
+                <div class="boardcell" 
+                     style="width:{{tileSize}}px; 
+                            height: {{tileSize}}px" 
+                     ng-repeat="col in board.slice(0,board.length) track by $index">   
+                    
+                    <flip class="image" flip-side="{{flipSideTile($parent.$index, $index)}}" 
+                          ng-class="getClassTile($parent.$index, $index)" 
+                          ng-click="userPlay($parent.$index, $index)">
+                                <flip-front>
+                                    <div ng-show="board[$parent.$index][$index].state===0">
+                                        <img class="imghover" 
+                                             width="{{tileSize}}px" 
+                                             height="{{tileSize}}px" 
+                                             src="images/themes/{{game.theme}}/_.jpg"/>
+                                    </div>
+                                    <!--<div ng-show="board[$parent.$index][$index].state===-1">
+                                        <img src="images/themes/{{game.theme}}/empty.png">
+                                    </div>-->
+                                </flip-front>
+                                <flip-back>
+                                    <img width="{{tileSize}}px" 
+                                         height="{{tileSize}}px" 
+                                         src="images/themes/{{game.theme}}/{{getImgSrc(board[$parent.$index][$index])}}"/>                                          
+                                </flip-back>
+                    </flip>
+                </div>            
+            </div>
+        </div>  
+        
+        <!-- footer -->
+        <div class="boardfooter" style="width: {{((tileSize*8)+16-2)}}px;">
+            <div class="game">
+                <small>Level <span ng-bind="levelname"></span></small>
+            </div>
+                
+        </div>
+    </div>   
+</div>    
+
+
+    
+<!-- temp
+
+<div class="playagain">
+                <div><a href='#'><img src='images/play.png' border='0' height=22 width=22 alt="Play again"></a></div>
+                <div><small>Play again</small></div>   
+                <div><a href="auth/logout">Logout</a></div>
+            </div>
+
+#computer memory
+<div>
+    <table>
+        <thead></thead>
+        <tbody>
+            <tr ng-repeat="row in memory.slice(0,memory.length) track by $index">
+                <td ng-repeat="col in memory.slice(0,memory.length) track by $index">
+                    <div ng-class="getClassMemory($parent.$index, $index)">
+                        {{memory[$parent.$index][$index]}}
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+        <tfoot></tfoot>
+    </table>            
+</div>
+-->

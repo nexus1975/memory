@@ -1,0 +1,47 @@
+<br>
+<!-- Header -->
+<div class="form-inline" >
+    <button ng-click="gotoMap()" class="btn btn-default">Back to Map</button>        
+</div>    
+
+<h3>Your routes</h3>
+<div ng-show="routes.length===0">    
+    You have no routes yet.
+    <br><br>
+</div>
+<button ng-click="refreshRouteList()" class="btn btn-info">Refresh list</button>
+
+<div ng-show="routes.length>0">
+    <br>
+    <form>
+    <table class="table table-condensed table-hover table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th>Device name</th>
+                <th>Route name</th>
+                <th>Start</th>
+                <th>Stop</th>
+                <th>Length</th>
+                <th>Pause</th>
+                <th>Distance</th>
+            </tr>
+        </thead>
+        <tbody>        
+            <tr ng-repeat="d in routes">
+                <td><span ng-bind="$index+1"></span></td>
+                <td><span ng-bind="d.devicename"></span></td>
+                <td><span ng-bind="d.routename"></span></td>
+                <td><span ng-bind="getDate(d.datefrom) |  date: 'yyyy MMMM d EEE, HH:mm:ss' "></span></td>
+                <td><span ng-bind="getDate(d.dateto) |  date: 'HH:mm:ss' "></span></td>
+                <td><span ng-bind="toTimeString(getLength(d.datefrom, d.dateto))"></span></td>
+                <td><span ng-bind="toTimeString(d.pausetime)"></span></td>
+                <td><span ng-bind="d.distance2"></span>/<span ng-bind="d.distance"></span></td>
+            </tr>
+        </tbody>
+    </table>
+    </form>
+</div>
+
+<br>
+<br>

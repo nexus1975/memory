@@ -1,0 +1,72 @@
+/* Work without ngAnimate included */
+flip > flip-front, flip > flip-back {
+  display: none;
+}
+flip > .flip-visible {
+  display: block;
+}
+
+/* Default height / width */
+flip {
+  height: 100%; 
+}
+
+/* While animating, position absolutely */
+/* and both visible */
+flip {
+  display: block;
+  position: relative;
+}
+flip > .flip-visible-add, flip > .flip-visible-remove {
+  position: absolute;
+  display: block;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+/* Set animation styles just before animation */
+flip > .flip-visible-add, flip > .flip-visible-remove { 
+  -webkit-backface-visibility: hidden; 
+  backface-visibility: hidden; 
+  /* Time can be overriden */
+  transition: -webkit-transform 0.5s; 
+  transition: transform 0.5s;
+}
+
+/* Front -> Back */
+flip > flip-front.flip-visible-remove {
+  -webkit-transform:  perspective(800px) rotateY(0); 
+  transform:  perspective(800px) rotateY(0);   
+}
+flip > flip-front.flip-visible-remove.flip-visible-remove-active {
+  -webkit-transform: perspective(800px) rotateY(-180deg); 
+  transform: perspective(800px) rotateY(-180deg);   
+}
+flip > flip-back.flip-visible-add {
+  -webkit-transform:  perspective(800px) rotateY(180deg); 
+  transform:  perspective(800px) rotateY(180deg);    
+}
+flip > flip-back.flip-visible-add.flip-visible-add-active {
+  -webkit-transform:  perspective(800px) rotateY(0); 
+  transform:  perspective(800px) rotateY(0);    
+}
+
+/* Back -> Front */
+flip > flip-front.flip-visible-add {
+ -webkit-transform:  perspective(800px) rotateY(-180deg); 
+ transform:  perspective(800px) rotateY(-180deg);    
+}
+flip > flip-front.flip-visible-add-active {
+  -webkit-transform:  perspective(800px) rotateY(0); 
+  transform:  perspective(800px) rotateY(0);     
+}
+flip > flip-back.flip-visible-remove {
+  -webkit-transform:  perspective(800px) rotateY(0); 
+  transform:  perspective(800px) rotateY(0);      
+}
+flip > flip-back.flip-visible-remove-active {
+ -webkit-transform:  perspective(800px) rotateY(180deg); 
+ transform:  perspective(800px) rotateY(180deg);    
+}
